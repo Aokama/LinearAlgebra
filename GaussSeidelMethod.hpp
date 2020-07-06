@@ -16,8 +16,6 @@ class GaussSeidelMethod : public JacobiMethodBase{
         void run(int max_iteration, bool debug_mode){
             int n = b.dimension().row;
             for(int m = 0; m < max_iteration; m++){
-                x.show("x");
-                x_old.show("x_old");
                 x_old = x;
                 for(int i = 1; i <= n; i++){
                     double front_sum = 0;
@@ -26,7 +24,7 @@ class GaussSeidelMethod : public JacobiMethodBase{
                     }
                     double back_sum = 0;
                     for(int j = i + 1; j <= n; j++){
-                        back_sum = A.at(i, j) * x_old.at(j);
+                        back_sum += A.at(i, j) * x_old.at(j);
                     }
                     x.set(i, (1 / A.at(i, i)) * (b.at(i) - front_sum - back_sum));
                 }
